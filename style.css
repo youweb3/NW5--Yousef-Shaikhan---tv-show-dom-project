@@ -1,3 +1,34 @@
+
+
+#root div{
+  width: 200px;
+  height: 400;
+  margin: 15px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
 #root {
   color: red;
+}
+
+ul {
+  list-style-type: none;
+  
+  flex-direction: row;
+  
+  justify-content: space-between;
+}
+
+li{
+  max-width: 120px;
+}
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
