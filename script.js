@@ -12,7 +12,6 @@ function makePageForEpisodes(episodeList) {
   
   for (let episode of episodeList) {
     
-    // let container = document.createElement("div");
     let episodeListItem = document.createElement ("li");
     let h3Element = document.createElement("h3");
     let image = document.createElement("img");
@@ -23,8 +22,6 @@ function makePageForEpisodes(episodeList) {
     paragraph.innerHTML = episode.summary;
 
     
-   
-    // episodeListItem.appendChild(episodeListItem);
     episodeListItem.appendChild(h3Element);
     episodeListItem.appendChild(image);
     episodeListItem.appendChild(paragraph);
@@ -36,5 +33,64 @@ function makePageForEpisodes(episodeList) {
  
 
 }
+
+
+// search
+const form=document.getElementById("form");
+  const searchInput = document.getElementById("search");
+  let episodeList=getAllEpisodes();
+
+  searchInput.addEventListener("keyup",(e)=>{
+    let value =e.target.value;
+    let html = "";
+    episodeList.forEach((element)=>{
+      if (element.name.toLowerCase().includes(value) || element.summary.toLowerCase().includes(value)) {
+         html += `<div>
+        <h3>${element.name}</h3>
+        <img src=${element.image.medium}>
+        <p>${element.summary}</p>
+        </div>`;
+
+      }
+    })
+
+   rootElem.innerHTML = html;
+  })
+
+
+
+//dropdown list
+  const searchEpisod= getAllEpisodes();
+  const select = document.getElementById("movies");
+
+   searchEpisod.forEach((episod) => {
+     const option = document.createElement("option");
+
+     option.setAttribute("value", episod.name);
+     select.appendChild(option);
+
+     if (episod.number < 10 && episod.season < 10) {
+       option.textContent = `S0${episod.number}E0${episod.season}-${episod.name}`;
+     } else {
+       option.textContent = `S${episod.number}E${episod.season}-${episod.name}`;
+     }
+   });
+//drop down search
+     select.addEventListener("change", () => {
+       let dropValue = select.value;
+       let html = "";
+      searchEpisod.forEach((episod)=>{
+        if (episod.name.includes(dropValue)) {
+          html += `<div>
+        <h3>${episod.name}</h3>
+        <img src=${episod.image.medium}>
+        <p>${episod.summary}</p>
+        </div>`;
+        }
+      })
+
+     rootElem.innerHTML = html;
+   });
+
 
 window.onload = setup;
