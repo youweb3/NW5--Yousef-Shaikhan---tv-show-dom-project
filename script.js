@@ -9,7 +9,7 @@ function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
   // rootElem.textContent = `Got ${episodeList.length} episode(s)`;
   const episodeListContaneir = document.createElement("ul");
-  
+  episodeListContaneir.innerHTML = "";
   for (let episode of episodeList) {
     
     let episodeListItem = document.createElement ("li");
@@ -61,6 +61,15 @@ select.onchange = handleChosenEpisode;
      }
    });
 
-
+// search////
+const searchElement = document.getElementById("search");
+searchElement.onchange = onSearchHandler;
+function onSearchHandler() {
+  const allEpisodes = getAllEpisodes();
+let filterList = allEpisodes.filter((episod) => {
+  return episod.name.includes(searchElement.value); 
+});
+makePageForEpisodes (filterList);
+}
 
 window.onload = setup;
